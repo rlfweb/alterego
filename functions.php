@@ -51,6 +51,8 @@ if ( ! function_exists( 'alterego_setup' ) ) :
 		register_nav_menus(
 			array(
 				'menu-1' => esc_html__( 'Primary', 'alterego' ),
+				'menu-2' => esc_html__( 'Footer', 'alterego' ),
+				'menu-3' => esc_html__( 'Social', 'alterego' ),
 			)
 		);
 
@@ -140,14 +142,15 @@ add_action( 'widgets_init', 'alterego_widgets_init' );
  * Enqueue scripts and styles.
  */
 function alterego_scripts() {
-	wp_enqueue_style( 'alterego-style', get_stylesheet_uri(), array(), _S_VERSION );
-	wp_style_add_data( 'alterego-style', 'rtl', 'replace' );
+	wp_enqueue_style( 'alterego-style', get_stylesheet_uri() );
 
-	wp_enqueue_script( 'alterego-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true );
+	wp_enqueue_style( 'alterego-tachyons', get_template_directory_uri() . '/css/tachyons.css');
 
-	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
-		wp_enqueue_script( 'comment-reply' );
-	}
+	wp_enqueue_style( 'alterego-fonts', get_template_directory_uri() . '/css/fonts.css');
+
+	wp_enqueue_style( 'alterego-custom', get_template_directory_uri() . '/css/custom.css');
+
+	wp_enqueue_script( 'alterego-marquee', get_template_directory_uri() . '/js/marquee.js' );
 }
 add_action( 'wp_enqueue_scripts', 'alterego_scripts' );
 

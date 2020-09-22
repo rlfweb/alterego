@@ -17,41 +17,49 @@ get_header();
 
 	<main id="primary" class="site-main">
 
-		<?php
-		if ( have_posts() ) :
-
-			if ( is_home() && ! is_front_page() ) :
-				?>
-				<header>
-					<h1 class="page-title screen-reader-text"><?php single_post_title(); ?></h1>
-				</header>
+			<!-- here we have our scrolling banner text -->
+			<h1 class="woocommerce-products-header__title page-title">
+				<span class="marquee">
+					New Arrivals
+				</span>
+			</h1>
+			<!-- in here we want to display our featured products -->
+			<ul class="products">
 				<?php
-			endif;
+					$args = array(
+						'post_type' => 'product',
+						'posts_per_page' => 3,
+						// this lets us manually sort products for the homepage
+						'orderby' => 'menu_order',
+						'order' => 'ASC',
+						'tax_query' => array(
+							array(
+								'taxonomy' => 'product_visibility',
+								'field'    => 'name',
+								'terms'    => 'featured',
+							),
+						),
+					);
+					$loop = new WP_Query( $args );
+					if ( $loop->have_posts() ) {
+						while ( $loop->have_posts() ) : $loop->the_post();
+							wc_get_template_part( 'content', 'product' );
+						endwhile;
+					} else {
+						echo __( 'No products found' );
+					}
+					wp_reset_postdata();
+				?>
+			</ul><!--/.products-->
+			
+			<div class="home-video">
+				<!-- in here goes our video which loops and autoplays -->
+				<video src="<?php echo get_template_directory_uri() . '/images/alter-ego-video-SD.mp4'; ?>" class="db w-100 h-auto" autoplay loop></video>
+			</div>
 
-			/* Start the Loop */
-			while ( have_posts() ) :
-				the_post();
 
-				/*
-				 * Include the Post-Type-specific template for the content.
-				 * If you want to override this in a child theme, then include a file
-				 * called content-___.php (where ___ is the Post Type name) and that will be used instead.
-				 */
-				get_template_part( 'template-parts/content', get_post_type() );
-
-			endwhile;
-
-			the_posts_navigation();
-
-		else :
-
-			get_template_part( 'template-parts/content', 'none' );
-
-		endif;
-		?>
 
 	</main><!-- #main -->
 
 <?php
-get_sidebar();
 get_footer();

@@ -25,12 +25,12 @@ do_action( 'woocommerce_before_cart' ); ?>
 	<table class="shop_table shop_table_responsive cart woocommerce-cart-form__contents" cellspacing="0">
 		<thead>
 			<tr>
-				<th class="product-remove">&nbsp;</th>
-				<th class="product-thumbnail">&nbsp;</th>
-				<th class="product-name"><?php esc_html_e( 'Product', 'woocommerce' ); ?></th>
-				<th class="product-price"><?php esc_html_e( 'Price', 'woocommerce' ); ?></th>
-				<th class="product-quantity"><?php esc_html_e( 'Quantity', 'woocommerce' ); ?></th>
-				<th class="product-subtotal"><?php esc_html_e( 'Subtotal', 'woocommerce' ); ?></th>
+				<th class="product-thumbnail tl">&nbsp;</th>
+				<th class="product-name tl"><?php esc_html_e( 'Product', 'woocommerce' ); ?></th>
+				<th class="product-price tl"><?php esc_html_e( 'Price', 'woocommerce' ); ?></th>
+				<th class="product-quantity tl"><?php esc_html_e( 'Quantity', 'woocommerce' ); ?></th>
+				<th class="product-subtotal tl"><?php esc_html_e( 'Subtotal', 'woocommerce' ); ?></th>
+				<th class="product-remove tl">&nbsp;</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -138,14 +138,27 @@ do_action( 'woocommerce_before_cart' ); ?>
 			<tr>
 				<td colspan="6" class="actions">
 
+				<div class="actions-bar justify-between">
+
 					<?php if ( wc_coupons_enabled() ) { ?>
-						<div class="coupon">
-							<label for="coupon_code"><?php esc_html_e( 'Coupon:', 'woocommerce' ); ?></label> <input type="text" name="coupon_code" class="input-text" id="coupon_code" value="" placeholder="<?php esc_attr_e( 'Coupon code', 'woocommerce' ); ?>" /> <button type="submit" class="button" name="apply_coupon" value="<?php esc_attr_e( 'Apply coupon', 'woocommerce' ); ?>"><?php esc_attr_e( 'Apply coupon', 'woocommerce' ); ?></button>
+						<div class="coupon flex items-center">
+
+							<label for="coupon_code" class="dn db-ns">
+							<?php esc_html_e( 'Coupon:', 'woocommerce' ); ?>
+							</label> 
+							
+							<input type="text" name="coupon_code" class="input-text input-coupon db mh2-ns" id="coupon_code" value="" placeholder="<?php esc_attr_e( 'Coupon code', 'woocommerce' ); ?>" /> 
+							
+							<button type="submit" class="button" name="apply_coupon" value="<?php esc_attr_e( 'Apply coupon', 'woocommerce' ); ?>"><?php esc_attr_e( 'Apply coupon', 'woocommerce' ); ?>
+							</button>
+
 							<?php do_action( 'woocommerce_cart_coupon' ); ?>
 						</div>
 					<?php } ?>
 
 					<button type="submit" class="button" name="update_cart" value="<?php esc_attr_e( 'Update cart', 'woocommerce' ); ?>"><?php esc_html_e( 'Update cart', 'woocommerce' ); ?></button>
+
+				</div>
 
 					<?php do_action( 'woocommerce_cart_actions' ); ?>
 
@@ -161,7 +174,7 @@ do_action( 'woocommerce_before_cart' ); ?>
 
 <?php do_action( 'woocommerce_before_cart_collaterals' ); ?>
 
-<div class="cart-collaterals">
+<div class="cart-collaterals flex justify-end">
 	<?php
 		/**
 		 * Cart collaterals hook.

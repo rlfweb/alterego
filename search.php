@@ -14,40 +14,31 @@ get_header();
 
 		<?php if ( have_posts() ) : ?>
 
-			<header class="page-header">
+		<!-- if we have a search query and some results -->
+		<?php if ( have_posts() and get_search_query() ) : ?>
+			<header class="page-header pa3 measure-wide center">
 				<h1 class="page-title">
 					<?php
-					/* translators: %s: search query. */
 					printf( esc_html__( 'Search Results for: %s', 'alterego' ), '<span>' . get_search_query() . '</span>' );
 					?>
 				</h1>
 			</header><!-- .page-header -->
+			<ul class="products">
+				<?php while ( have_posts() and get_search_query() ) : the_post();
+					wc_get_template_part( 'content', 'product' );
+				endwhile; ?>
+			</ul>
+		<?php endif; ?>
 
-			<?php
-			/* Start the Loop */
-			while ( have_posts() ) :
-				the_post();
-
-				/**
-				 * Run the loop for the search to output the results.
-				 * If you want to overload this in a child theme then include a file
-				 * called content-search.php and that will be used instead.
-				 */
-				get_template_part( 'template-parts/content', 'search' );
-
-			endwhile;
-
-			the_posts_navigation();
-
-		else :
-
-			get_template_part( 'template-parts/content', 'none' );
-
-		endif;
-		?>
+		<!-- if we no search query, show the search form -->
+		<?php if ( !get_search_query() or !have_posts() ) : ?>
+			<div class="pa3 measure-wide center">
+				<h1 class="page-title">Search</h1>
+				<?php get_search_form(); ?>
+			</div>
+		<?php endif; ?>
 
 	</main><!-- #main -->
 
 <?php
-get_sidebar();
 get_footer();

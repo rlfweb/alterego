@@ -11,21 +11,27 @@
 
 ?>
 
-	<footer id="colophon" class="site-footer">
-		<div class="site-info">
-			<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'alterego' ) ); ?>">
-				<?php
-				/* translators: %s: CMS name, i.e. WordPress. */
-				printf( esc_html__( 'Proudly powered by %s', 'alterego' ), 'WordPress' );
-				?>
-			</a>
-			<span class="sep"> | </span>
-				<?php
-				/* translators: 1: Theme name, 2: Theme author. */
-				printf( esc_html__( 'Theme: %1$s by %2$s.', 'alterego' ), 'alterego', '<a href="http://underscores.me/">simplecomplex</a>' );
-				?>
-		</div><!-- .site-info -->
-	</footer><!-- #colophon -->
+</div><!-- #content -->
+
+<footer id="colophon" class="site-footer flex-l justify-between regular pa3 pv4-l mt4">
+	<!-- here we add our navigations that we registered via 
+	our functions.php and we can now manage these through
+	the dashboard -->
+	<?php
+		wp_nav_menu( array(
+		'theme_location' => 'menu-2',
+		'menu_id'        => 'footer-menu',
+		'menu_class'		 => 'footer-menu list flex pa0 ma0 mb3 mb0-l'
+		) );
+	?>
+	<?php
+		wp_nav_menu( array(
+		'theme_location' => 'menu-3',
+		'menu_id'        => 'social-menu',
+		'menu_class'		 => 'footer-menu list flex pa0 ma0'
+		) );
+	?>
+</footer><!-- #colophon -->
 </div><!-- #page -->
 
 <?php wp_footer(); ?>
