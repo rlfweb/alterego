@@ -1,0 +1,624 @@
+body {
+  font-family: 'lunchtype24expanded_regular', sans-serif;
+  font-size: 18px;
+  line-height: 1.4;
+  color: #000;
+}
+
+body,
+input,
+select,
+textarea {
+  /* this smooths our font edges so they are less jagged */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* this removes the default blue outline when 
+the elements are clicked on */
+input,
+textarea,
+button {
+  outline: none;
+}
+
+a {
+  color: #000;
+  text-decoration: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+.site-header {
+  background-color: #fb7915;
+}
+
+.home .main-navigation,
+.archive .main-navigation {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
+}
+
+.main-menu a {
+  display: block;
+  /* here we make our navigation text 20px by default */
+  font-size: 20px;
+  text-decoration: none;
+  color: #fff;
+  line-height: 1.5;
+}
+
+/* override the default image styles */
+.site-branding img {
+  width: auto !important;
+  height: auto !important;
+  display: block;
+  max-height: 100vh;
+}
+
+.logo {
+  max-width: 330px;
+}
+
+.products {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+}
+
+/* here we only style up products in the product loop */
+.products .product a {
+  display: block;
+  padding: 32px;
+  text-decoration: none;
+  color: #fff;
+}
+
+.product img {
+  display: block;
+  width: auto !important;
+  height: auto !important;
+  margin: auto;
+}
+
+.product-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 0 32px 24px;
+  transition: opacity 0.2s ease;
+  opacity: 0;
+}
+
+/* fade in our product info when we hover a product */
+.product:hover .product-info {
+  opacity: 1;
+}
+
+.product-info .woocommerce-loop-product__title {
+  font-size: 24px;
+  font-family: 'lunchtype24expanded_medium', sans-serif;
+  margin: 0;
+  line-height: 1;
+}
+
+.product-info .price {
+  font-size: 20px;
+}
+
+.woocommerce-products-header__title {
+  /* flex things so we can display them as boxes side by side nicely */
+  display: flex;
+  /* makes sure the words don’t wrap onto new lines */
+  white-space: nowrap;
+  /* remove the default margins */
+  margin: 0 auto;
+  /* stops scrollbars on the page */
+  overflow: hidden;
+  /* essentially this is a bit of a visual trick */
+  transform: translateX(-50%);
+  width: 200%;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.marquee {
+  animation: marquee 2s linear infinite;
+  display: block;
+  line-height: 1;
+  font-size: 20px;
+  padding: 20px;
+}
+
+/* 
+
+1. when we hover over our navigation, fade out all the links
+2. for the particular link that we’re hovering on, keep it faded in
+3. when we’re on a particular category, keep that link item fade in too 
+
+*/
+
+.main-menu .menu-item a {
+  transition: opacity 0.2s ease;
+}
+
+.archive .main-menu .menu-item a,
+.main-menu:hover .menu-item a {
+  opacity: 0.25;
+}
+
+.main-menu .menu-item.current-menu-item a,
+.main-menu .menu-item:hover a {
+  opacity: 1;
+}
+
+/* this stretches the image to fill the available space */
+.woocommerce-product-gallery {
+  flex: auto;
+}
+
+/* with our product summary we want to constrain the width and also
+add some padding to the left hand side */
+
+.single-product .summary {
+  max-width: 390px;
+}
+
+/* here we write some basic styles for our static pages */
+
+.page-content {
+  max-width: 1220px;
+}
+
+.header-page {
+  background-color: #fbbb28;
+}
+
+/* footer styles */
+/* todo: remember to style up the footer with responsive styles too */
+
+.site-footer li {
+  /* 1rem is equal to 16px */
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.site-footer a {
+  display: block;
+  color: #000;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+/* our product sale price */
+.price ins {
+  text-decoration: none;
+}
+
+/* styles for our search + cart box */
+.site-branding .search-meta {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+/* for our product pages we want to position our basket/search
+icons slightly differently  */
+.summary .search-meta {
+  margin-bottom: 1rem;
+  justify-content: flex-end;
+}
+
+/* cart styles */
+
+/* table headings and table cells */
+th,
+td {
+  padding: 0.5rem;
+  /* here we make the font size 14px */
+  font-size: 0.875rem;
+}
+
+th {
+  /* apply this to all table headings (because they algin
+  to the center by default both horizontally and vertically) */
+  text-align: left;
+  vertical-align: top;
+}
+
+.cart_item td {
+  border-bottom: solid 1px #ccc;
+}
+
+.quantity input {
+  width: 56px;
+  text-align: center;
+}
+
+.cart-heading {
+  background-color: #f2f2f2;
+}
+
+/* cart image styles */
+
+.product-thumbnail-bg {
+  max-width: 140px;
+  min-width: 140px;
+  padding: 0.25rem;
+}
+
+.product-thumbnail a {
+  display: block;
+  margin: auto;
+}
+
+.product-thumbnail img {
+  display: block;
+  width: 100% !important;
+  height: auto !important;
+}
+
+.product-remove img {
+  min-width: 16px;
+}
+
+/* button styles */
+.button {
+  display: inline-block;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 1;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.input-text,
+.wpforms-field input,
+.wpforms-field textarea {
+  height: 2rem;
+  padding: 0 0.5rem !important;
+  font-size: 1rem;
+  border: solid 1px rgba(0, 0, 0, 0.2);
+}
+
+/* cart totals element */
+
+.order-total {
+  background-color: #f2f2f2;
+}
+
+.wc-proceed-to-checkout .button {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+/* product page styles */
+
+.summary .product_title {
+  color: #fff;
+  font-family: 'lunchtype24expanded_medium', sans-serif;
+  font-size: 2rem;
+  line-height: 1;
+  margin-top: 0;
+  margin-bottom: 2rem;
+}
+
+.summary .price {
+  font-size: 1.5rem;
+  color: #fff;
+  line-height: 1;
+  margin-top: 0;
+  margin-bottom: 2rem;
+}
+
+.summary .woocommerce-product-details__short-description {
+  color: #fff;
+  line-height: 1.333;
+  margin-bottom: 2rem;
+}
+
+.summary .p1 {
+  margin: 0;
+}
+
+.summary .quantity {
+  /* here we double make sure the quantity element is hidden */
+  display: none !important;
+}
+
+.summary .button {
+  background-color: #fff;
+  color: #000;
+  /* todo: make the button color dynamic 
+  with the background of the product */
+}
+
+/* product styles */
+
+.product .woocommerce-product-gallery__wrapper {
+  margin: 0;
+}
+
+/* product variations styles */
+
+.variations_form,
+.variations tbody {
+  display: flex;
+}
+
+/* hiding the labels */
+.variations .label {
+  display: none;
+}
+
+/* overriding the default td styles */
+.variations .value {
+  display: block;
+  padding: 0;
+  padding-right: 0.25rem;
+}
+
+/* select elements are a little bit stubborn to style up
+todo: homework challenge to get these looking like the final design */
+.variations select {
+  height: 32px;
+  border: none;
+  padding: 0;
+  display: block;
+}
+
+.reset_variations {
+  display: none;
+}
+
+/* our styles for our flash message */
+.woocommerce-message,
+.woocommerce-error,
+.woocommerce-notice {
+  line-height: 2rem;
+  font-size: 1rem;
+  color: #fff;
+}
+
+.woocommerce-message {
+  background-color: #c0d045;
+}
+
+.woocommerce-info {
+  background-color: #fbbb28;
+}
+
+.woocommerce-error {
+  background-color: #ff4141;
+}
+
+.flash-message .button {
+  background-color: transparent;
+  padding: 0;
+  margin-left: 1rem;
+}
+
+/* styles for our checkout */
+.woocommerce-checkout .page-content,
+.static-page {
+  max-width: 580px;
+}
+
+.woocommerce-form-coupon-toggle {
+  margin-bottom: 1.5rem;
+}
+
+.woocommerce-form-coupon-toggle,
+.showcoupon {
+  color: #fff;
+}
+
+.woocommerce-checkout h3,
+.woocommerce-order-details h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  margin-top: 0;
+  line-height: 1.2;
+}
+
+.form-row {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+}
+
+.form-row label {
+  display: block;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  line-height: 1;
+}
+
+.woocommerce-input-wrapper {
+  display: block;
+}
+
+.woocommerce-input-wrapper input {
+  display: block;
+  width: 100%;
+}
+
+.select2-container {
+  display: block;
+  font-size: 1rem;
+}
+
+.woocommerce-shipping-fields h3 {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.woocommerce-input-wrapper textarea {
+  min-height: 6rem;
+  padding: 0.5rem !important;
+  width: 100%;
+  resize: vertical;
+}
+
+.woocommerce-checkout-review-order-table {
+  width: 100%;
+}
+
+.wc_payment_methods {
+  padding-left: 0;
+  list-style: none;
+  margin-bottom: 1.5rem;
+}
+
+.wc_payment_methods label {
+  padding-left: 0 !important;
+}
+
+fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.wc-stripe-elements-field {
+  border: solid 1px rgba(0, 0, 0, 0.2) !important;
+  padding: 0.5rem !important;
+  margin-bottom: 0 !important;
+  margin-top: 0.5rem !important;
+}
+
+.woocommerce-checkout-review-order-table td,
+.woocommerce-checkout-review-order-table th {
+  border: none;
+}
+
+.notes {
+  padding-top: 1rem;
+}
+
+.shipping ul {
+  padding: 0;
+  list-style: none;
+  margin: 0;
+}
+
+/* order confirmation page */
+.woocommerce-order-overview {
+  padding-left: 0;
+  list-style: none;
+  margin-top: 0;
+}
+
+.woocommerce-order-details h2 {
+  margin-top: 1.5rem;
+}
+
+address {
+  font-style: normal;
+}
+
+/* footer styles */
+.site-footer {
+  border-top: solid 1px rgba(0, 0, 0, 0.2);
+  font-size: 0.75rem;
+}
+
+.home .site-footer,
+.archive .site-footer,
+.single-product .site-footer {
+  margin-top: 0;
+}
+
+/* contact form styles */
+.wpforms-error {
+  padding-top: 0.5rem;
+  font-size: 1rem;
+}
+
+.wpforms-field-hp {
+  display: none;
+}
+
+/* styles that get applied only below 40em width */
+@media (max-width: 40em) {
+  .product-thumbnail {
+    display: none;
+  }
+  .input-text {
+    height: 30px;
+  }
+  .input-coupon {
+    max-width: 160px;
+  }
+  .coupon {
+    margin-bottom: 1rem;
+  }
+}
+
+@media (min-width: 40em) {
+  th,
+  td {
+    padding: 1rem;
+    /* equal to 16px */
+    font-size: 1rem;
+  }
+  .actions-bar {
+    display: flex;
+  }
+  .button {
+    font-size: 1rem;
+  }
+  /* here we make our cart totals box have a narrower width*/
+  .cart_totals {
+    max-width: 360px;
+    min-width: 300px;
+  }
+  .site-footer {
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 60em) {
+  .main-menu a {
+    font-size: 32px;
+  }
+  .marquee {
+    font-size: 32px;
+    padding: 32px;
+  }
+  .summary .product_title {
+    font-size: 3rem;
+  }
+  .site-branding .search-meta {
+    right: 3rem;
+    top: 3rem;
+  }
+}
+
+@media (max-width: 30em) {
+  .summary .search-meta {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+  }
+}
